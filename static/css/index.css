@@ -37,9 +37,6 @@
     gap:20px;
     }
     
-    
-    /* TARJETAS */
-    
     .div2-1{
     width:50%;
     padding:50px 25px;
@@ -79,9 +76,6 @@
     border-radius:5px;
     }
     
-    
-    /* BOTONES */
-    
     .btn-primary{
     display:inline-block;
     padding:10px 25px;
@@ -106,17 +100,11 @@
     text-align:center;
     }
     
-    
-    /* BOTONES HOLA */
-    
     .botones-hola{
     display:flex;
     gap:10px;
     margin-top:15px;
     }
-    
-    
-    /* CHAT INPUT */
     
     .chat-input{
     display:flex;
@@ -128,9 +116,6 @@
     flex:1;
     padding:6px;
     }
-    
-    
-    /* TEXTOS */
     
     .div3-texto{
     font-size:16px;
@@ -165,9 +150,6 @@
     width:100%;
     padding:6px;
     }
-    
-    
-    /* RESPONSIVE */
     
     @media(max-width:991px){
     

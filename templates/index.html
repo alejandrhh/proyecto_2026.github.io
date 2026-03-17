@@ -2,232 +2,215 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Study IA</title>
+    <title>Study IA</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 
 </head>
 
 <body>
 
-<section class="div2">
+    <section class="div2">
 
-<div class="contenedor">
+        <div class="contenedor">
 
 
-<!-- FILA 1 -->
+            <div class="fila1">
 
-<div class="fila1">
+                <div class="div2-1">
 
-<div class="div2-1">
+                    <h1>Study IA</h1>
 
-<h1>Study IA</h1>
+                    <ul>
+                        <li>Organiza tu tiempo.</li>
+                        <li>Aprende con IA.</li>
+                        <li>Mejora tu rendimiento.</li>
+                    </ul>
 
-<ul>
-<li>Organiza tu tiempo.</li>
-<li>Aprende con IA.</li>
-<li>Mejora tu rendimiento.</li>
-</ul>
+                    <br>
 
-<br>
+                    <a href="#" class="btn-primary">INICIAR SESIÓN</a>
+                    <a href="#" class="btn-secondary">REGISTRARSE</a>
 
-<a href="#" class="btn-primary">INICIAR SESIÓN</a>
-<a href="#" class="btn-secondary">REGISTRARSE</a>
+                </div>
 
-</div>
 
 
+                <div class="div2-2">
 
-<div class="div2-2">
+                    <h1>Hola</h1>
+                    <hr>
 
-<h1>Hola</h1>
-<hr>
+                    <h4 class="parte2">
 
-<h4 class="parte2">
+                        Próxima tarea:<br>
 
-Próxima tarea:<br>
+                        {% if proxima %}
+                        {{ proxima[1] }} - {{ proxima[2] }}
+                        {% else %}
+                        No hay tareas pendientes
+                        {% endif %}
 
-{% if proxima %}
-{{ proxima[1] }} - {{ proxima[2] }}
-{% else %}
-No hay tareas pendientes
-{% endif %}
+                    </h4>
 
-</h4>
 
+                    <div class="parte2">
 
-<div class="parte2">
+                        <b>Resumen:</b>
 
-<b>Resumen:</b>
+                        <ul>
+                            <li>{{ completadas }} completadas</li>
+                            <li>{{ pendientes }} pendientes</li>
+                            <li>{{ urgentes }} urgentes</li>
+                        </ul>
 
-<ul>
-<li>{{ completadas }} completadas</li>
-<li>{{ pendientes }} pendientes</li>
-<li>{{ urgentes }} urgentes</li>
-</ul>
+                    </div>
 
-</div>
 
+                    {% if urgentes > 0 %}
 
-{% if urgentes > 0 %}
+                    <p class="reco">
 
-<p class="reco">
+                        ⚠ Tienes {{ urgentes }} tareas urgentes
 
-⚠ Tienes {{ urgentes }} tareas urgentes
+                    </p>
 
-</p>
+                    {% endif %}
 
-{% endif %}
 
+                    <div class="botones-hola">
 
-<div class="botones-hola">
+                        <a href="#" class="btn-primary">ORGANIZADOR</a>
+                        <a href="#" class="btn-secondary">ASISTENTE IA</a>
+                        <a href="#" class="btn-secondary">PROGRESO</a>
 
-<a href="#" class="btn-primary">ORGANIZADOR</a>
-<a href="#" class="btn-secondary">ASISTENTE IA</a>
-<a href="#" class="btn-secondary">PROGRESO</a>
+                    </div>
 
-</div>
+                </div>
 
-</div>
+            </div>
 
-</div>
+            <div class="fila2">
 
+                <div class="div2-3">
 
+                    <h1>Mis Tareas</h1>
+                    <hr>
+                    <br>
 
-<!-- FILA 2 -->
+                    {% if request.args.get('error') %}
+                    <div class="reco">
+                        Debes escribir una tarea
+                    </div>
+                    {% endif %}
 
-<div class="fila2">
 
+                    <form action="/agregar" method="POST">
 
-<!-- MIS TAREAS -->
+                        <input type="text" name="titulo" placeholder="Nueva tarea">
 
-<div class="div2-3">
+                        <br><br>
 
-<h1>Mis Tareas</h1>
-<hr>
-<br>
+                        <input type="date" name="fecha">
 
-{% if request.args.get('error') %}
-<div class="reco">
-Debes escribir una tarea
-</div>
-{% endif %}
+                        <br><br>
 
+                        <button type="submit" class="btn-primary">
+                            AÑADIR TAREA +
+                        </button>
 
-<form action="/agregar" method="POST">
+                    </form>
 
-<input type="text" name="titulo" placeholder="Nueva tarea">
+                    <br>
 
-<br><br>
 
-<input type="date" name="fecha">
+                    {% for tarea in tareas %}
 
-<br><br>
+                    <p class="div3-texto">
 
-<button type="submit" class="btn-primary">
-AÑADIR TAREA +
-</button>
+                        {{ tarea[1] }} - {{ tarea[2] }}
 
-</form>
+                        {% if tarea[3] == 0 %}
+                        <a href="/completar/{{ tarea[0] }}">✔</a>
+                        {% else %}
+                        ✔
+                        {% endif %}
 
-<br>
+                        <a href="/eliminar/{{ tarea[0] }}">❌</a>
 
+                    </p>
 
-{% for tarea in tareas %}
+                    {% endfor %}
 
-<p class="div3-texto">
+                    <p class="reco">
+                        Recomendación: Prioriza estudiar para el examen
+                    </p>
 
-{{ tarea[1] }} - {{ tarea[2] }}
+                </div>
 
-{% if tarea[3] == 0 %}
-<a href="/completar/{{ tarea[0] }}">✔</a>
-{% else %}
-✔
-{% endif %}
+                <div class="div2-4">
 
-<a href="/eliminar/{{ tarea[0] }}">❌</a>
+                    <h1>Study IA Asistente</h1>
+                    <hr>
+                    <br>
 
-</p>
+                    <div class="reco">
+                        Usuario: Explica la fotosíntesis
+                    </div>
 
-{% endfor %}
+                    <p class="parte2">
+                        IA: la fotosíntesis es el proceso mediante el cual las plantas convierten la luz en energía.
+                    </p>
 
-<p class="reco">
-Recomendación: Prioriza estudiar para el examen
-</p>
+                    <br>
+                    <hr>
 
-</div>
+                    <div class="chat-input">
 
+                        <input type="text" placeholder="Escribe tu pregunta">
 
+                        <button class="btn-primary">
+                            ENVIAR
+                        </button>
 
-<!-- ASISTENTE -->
+                    </div>
 
-<div class="div2-4">
+                </div>
+                
+                <div class="div2-5">
 
-<h1>Study IA Asistente</h1>
-<hr>
-<br>
+                    <h1>Mi progreso</h1>
+                    <hr>
 
-<div class="reco">
-Usuario: Explica la fotosíntesis
-</div>
+                    <div class="parte2">
 
-<p class="parte2">
-IA: la fotosíntesis es el proceso mediante el cual las plantas convierten la luz en energía.
-</p>
+                        Tareas completadas: {{ completadas }}<br>
+                        Tareas pendientes: {{ pendientes }}
 
-<br>
-<hr>
+                    </div>
 
-<div class="chat-input">
+                    <br>
 
-<input type="text" placeholder="Escribe tu pregunta">
+                    <div class="parte2">
+                        Materia con más trabajo
+                    </div>
 
-<button class="btn-primary">
-ENVIAR
-</button>
+                    <br>
 
-</div>
+                    <p class="reco">
+                        Buen trabajo
+                    </p>
 
-</div>
+                </div>
 
+            </div>
 
+        </div>
 
-<!-- PROGRESO -->
-
-<div class="div2-5">
-
-<h1>Mi progreso</h1>
-<hr>
-
-<div class="parte2">
-
-Tareas completadas: {{ completadas }}<br>
-Tareas pendientes: {{ pendientes }}
-
-</div>
-
-<br>
-
-<div class="parte2">
-Materia con más trabajo
-</div>
-
-<br>
-
-<p class="reco">
-Buen trabajo
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
+    </section>
 
 </body>
 
