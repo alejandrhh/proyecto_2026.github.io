@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 
 </head>
+<script src="../static/java/index.js"></script>
 
 <body>
 
@@ -39,9 +40,23 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="div2-2">
 
-                    <h1>Hola</h1>
+                    <h2>Resumen del día</h2>
                     <hr>
 
                     <h4 class="parte2">
@@ -62,12 +77,16 @@
                         <b>Resumen:</b>
 
                         <ul>
-                            <li>{{ completadas }} completadas</li>
+                            <li>{{ completadas }} completadas </li>
                             <li>{{ pendientes }} pendientes</li>
-                            <li>{{ urgentes }} urgentes</li>
+                            <li>{{ urgentes }} 🔴 urgentes</li>
                         </ul>
 
                     </div>
+
+
+
+
 
 
                     {% if urgentes > 0 %}
@@ -95,9 +114,32 @@
 
             <div class="fila2">
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="div2-3">
 
-                    <h1>Mis Tareas</h1>
+                    <h2>Mis Tareas</h2>
                     <hr>
                     <br>
 
@@ -110,14 +152,15 @@
 
                     <form action="/agregar" method="POST">
 
-                        <input type="text" name="titulo" placeholder="Nueva tarea">
+                        <input type="text" name="titulo" placeholder="Nueva tarea" id="input_nuevatarea">
 
                         <br><br>
+
                         <input type="date" name="fecha">
 
                         <br><br>
 
-                        <button type="submit" class="btn-primary">
+                        <button type="submit" class="btn-add">
                             AÑADIR TAREA +
                         </button>
 
@@ -150,9 +193,41 @@
 
                 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="div2-4">
 
-                    <h1>Study IA Asistente</h1>
+                    <h2>Study IA Asistente</h2>
                     <hr>
                     <br>
 
@@ -165,7 +240,6 @@
                     </p>
 
                     <br>
-                    <hr>
 
                     <div class="chat-input">
 
@@ -178,10 +252,41 @@
                     </div>
 
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
                 
                 <div class="div2-5">
 
-                    <h1>Mi progreso</h1>
+                    <h2>Mi progreso</h2>
                     <hr>
 
                     <div class="parte2">
@@ -194,14 +299,19 @@
                     <br>
 
                     <div class="parte2">
-                        Materia con más trabajo
+                        <h3>Materia con más trabajo</h3>
                     </div>
 
                     <br>
 
+                    <div class="parte2">
+                        <h3>Motivación del día</h3>
                     <p class="reco">
                         Buen trabajo
                     </p>
+                    </div>
+
+                    
 
                 </div>
 
